@@ -1,0 +1,10 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+retail-online-store,com.retail.online.store.app,RetailOnlineStoreApplication,0,8,0,0,0,3,0,2,0,2
+retail-online-store,com.retail.online.store.model,Bill,0,46,0,0,0,20,0,10,0,10
+retail-online-store,com.retail.online.store.model,ShoppingItem,0,58,0,0,0,15,0,10,0,10
+retail-online-store,com.retail.online.store.model,UserType,0,65,0,0,0,8,0,4,0,4
+retail-online-store,com.retail.online.store.model,User,0,70,0,0,0,20,0,10,0,10
+retail-online-store,com.retail.online.store.builder,RetailOnlineStoreBill,0,295,0,6,0,50,0,11,0,8
+retail-online-store,com.retail.online.store.builder,BillBuilder,0,35,0,0,0,10,0,6,0,6
+retail-online-store,com.retail.online.store.builder,UserBuilder,0,35,0,0,0,11,0,6,0,6
+retail-online-store,com.retail.online.store.constants,ShoppingItemCategory,0,64,0,0,0,2,0,1,0,1

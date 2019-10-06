@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Bill.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">retail-online-store</a> &gt; <a href="index.source.html" class="el_package">com.retail.online.store.model</a> &gt; <span class="el_source">Bill.java</span></div><h1>Bill.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package com.retail.online.store.model;
+
+import java.util.List;
+
+/**
+ * @author Rajkumar Verma
+ *
+ */
+public class Bill {
+
+	private List&lt;ShoppingItem&gt; shoopingItemList;
+	private Double totalBill;
+	private Double totalBillAfterUserTypeDiscount;
+	private Double finalbillCost;
+
+	/**
+	 * 
+	 */
+<span class="fc" id="L22">	public Bill() {</span>
+		// TODO Auto-generated constructor stub
+<span class="fc" id="L24">	}</span>
+
+	/**
+	 * @param user
+	 * @param shoopingItemList
+	 * @param totalBill
+	 * @param totalBillAfterUserTypeDiscount
+	 * @param finalbillCost
+	 */
+	public Bill(List&lt;ShoppingItem&gt; shoopingItemList, Double totalBill, Double totalBillAfterUserTypeDiscount,
+			Double finalbillCost) {
+<span class="fc" id="L35">		super();</span>
+
+<span class="fc" id="L37">		this.shoopingItemList = shoopingItemList;</span>
+<span class="fc" id="L38">		this.totalBill = totalBill;</span>
+<span class="fc" id="L39">		this.totalBillAfterUserTypeDiscount = totalBillAfterUserTypeDiscount;</span>
+<span class="fc" id="L40">		this.finalbillCost = finalbillCost;</span>
+<span class="fc" id="L41">	}</span>
+
+	public List&lt;ShoppingItem&gt; getShoopingItemList() {
+<span class="fc" id="L44">		return shoopingItemList;</span>
+	}
+
+	public void setShoopingItemList(List&lt;ShoppingItem&gt; shoopingItemList) {
+<span class="fc" id="L48">		this.shoopingItemList = shoopingItemList;</span>
+<span class="fc" id="L49">	}</span>
+
+	public Double getTotalBill() {
+<span class="fc" id="L52">		return totalBill;</span>
+	}
+
+	public void setTotalBill(Double totalBill) {
+<span class="fc" id="L56">		this.totalBill = totalBill;</span>
+<span class="fc" id="L57">	}</span>
+
+	public Double getTotalBillAfterUserTypeDiscount() {
+<span class="fc" id="L60">		return totalBillAfterUserTypeDiscount;</span>
+	}
+
+	public void setTotalBillAfterUserTypeDiscount(Double totalBillAfterUserTypeDiscount) {
+<span class="fc" id="L64">		this.totalBillAfterUserTypeDiscount = totalBillAfterUserTypeDiscount;</span>
+<span class="fc" id="L65">	}</span>
+
+	public Double getFinalbillCost() {
+<span class="fc" id="L68">		return finalbillCost;</span>
+	}
+
+	public void setFinalbillCost(Double finalbillCost) {
+<span class="fc" id="L72">		this.finalbillCost = finalbillCost;</span>
+<span class="fc" id="L73">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,10 @@
+com\retail\online\store\model\ShoppingItem.class
+com\retail\online\store\app\RetailOnlineStoreApplication.class
+com\retail\online\store\constants\ShoppingItemCategory.class
+com\retail\online\store\model\UserType.class
+com\retail\online\store\builder\UserBuilder.class
+com\retail\online\store\builder\RetailOnlineStoreBill.class
+com\retail\online\store\builder\BillBuilder.class
+com\retail\online\store\model\Bill.class
+com\retail\online\store\model\User.class
+com\retail\online\store\operations\BillOperations.class

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RetailOnlineStoreBill.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">retail-online-store</a> &gt; <a href="index.source.html" class="el_package">com.retail.online.store.builder</a> &gt; <span class="el_source">RetailOnlineStoreBill.java</span></div><h1>RetailOnlineStoreBill.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package com.retail.online.store.builder;
+
+import java.util.List;
+
+import com.retail.online.store.model.Bill;
+import com.retail.online.store.model.ShoppingItem;
+import com.retail.online.store.constants.ShoppingItemCategory;
+import com.retail.online.store.model.User;
+import com.retail.online.store.operations.BillOperations;
+
+/**
+ * @author Rajkumar Verma
+ *
+ */
+<span class="fc" id="L18">public class RetailOnlineStoreBill implements BillOperations {</span>
+
+	private Bill userBill;
+
+	private User user;
+
+	/*
+	 * Init User Info and Bill
+	 */
+    public void collectUserInfo(User user) {
+
+<span class="fc" id="L29">		userBill = new Bill();</span>
+
+<span class="fc" id="L31">		this.user = user;</span>
+
+<span class="fc" id="L33">	}</span>
+
+
+	
+	/*
+	 *  This function used to prepare shopping list for bill calculation
+	 * @param shoopingItemList list of item user buy
+	 * 
+	 * @return total bill cost
+	 */
+	public Double collectPurchasedItems(List&lt;ShoppingItem&gt; shoopingItemList) {
+<span class="fc" id="L44">		userBill = new Bill();</span>
+<span class="fc" id="L45">		userBill.setShoopingItemList(shoopingItemList);</span>
+
+<span class="fc" id="L47">		return getTotalBillCost(shoopingItemList);</span>
+
+	}
+
+	/*
+	 * This function to calculate shopping cost for all items
+	 * 
+	 * @param shoopingItemList list of item user buy
+	 * 
+	 * @return total bill cost
+	 */
+	private Double getTotalBillCost(List&lt;ShoppingItem&gt; shoopingItemList) {
+<span class="fc" id="L59">		Double cost = 0.0;</span>
+
+<span class="fc bfc" id="L61" title="All 2 branches covered.">		for (ShoppingItem shoppingItem : shoopingItemList) {</span>
+<span class="fc" id="L62">			cost += shoppingItem.getItemCost();</span>
+<span class="fc" id="L63">		}</span>
+<span class="fc" id="L64">		return cost;</span>
+	}
+
+	/**
+	 * This function user to apply discount per user segment as the following
+	 * Employee of the store, he gets a 30% discount 
+	 * Affiliate of the store, he gets a 10% discount 
+	 * Customer for over 2 years, he gets a 5% discount
+	 * 
+	 * @param shoopingItemList  list of item user buy
+	 * @return total bill cost after user type discount
+	 */
+	public Double userTypeDiscountApply(Double cost) {
+<span class="fc" id="L77">		userBill.setTotalBill(cost);</span>
+<span class="fc" id="L78">		Double discountAmount = 0.0;</span>
+<span class="fc" id="L79">		int discountPercentage = user.getUserType().getDiscountPercentage();</span>
+<span class="fc" id="L80">		Double groceriesAmount = getGroceriedItemCost(userBill.getShoopingItemList());</span>
+<span class="fc" id="L81">		System.out.println(&quot;Total Bill Amount is :&quot; + userBill.getTotalBill());</span>
+<span class="fc" id="L82">		System.out.println(</span>
+<span class="fc" id="L83">				&quot;User Type is: &quot; + user.getUserType().getUserTypeId() + &quot;Discount: &quot; + discountPercentage + &quot; %&quot;);</span>
+
+<span class="fc" id="L85">		System.out.println(&quot;Total GROCERIES items is :&quot; + groceriesAmount);</span>
+<span class="fc" id="L86">		discountAmount = (cost - groceriesAmount);</span>
+<span class="fc" id="L87">		System.out.println(&quot;Total Bill Amount Without GROCERIES is :&quot; + discountAmount);</span>
+
+<span class="fc" id="L89">		discountAmount = ((discountAmount * discountPercentage) / 100);</span>
+<span class="fc" id="L90">		System.out.println(&quot;Total user Type discount Amount: &quot; + discountAmount);</span>
+
+<span class="fc" id="L92">		userBill.setTotalBillAfterUserTypeDiscount(cost - discountAmount);</span>
+
+<span class="fc" id="L94">		System.out.println(</span>
+<span class="fc" id="L95">				&quot;Total Bill Amount After User Type Discount is :&quot; + userBill.getTotalBillAfterUserTypeDiscount());</span>
+
+<span class="fc" id="L97">		return userBill.getTotalBillAfterUserTypeDiscount();</span>
+	}
+
+	/*
+	 * This function used to calculate final discount on bill using the following
+	 * For every $100 on the bill, there would be a $ 5 discount (e.g. for $ 990, you get $ 45 as a discount).
+	 * 
+	 * @param billCost after apply first discount for user type
+	 * @return final bill amount after apply discount
+	 */
+	public Double totalBillDiscountApply(Double billCost) {
+
+<span class="fc" id="L109">		System.out.println(&quot;Bill Amount Beofre Final Discount is : &quot; + billCost);</span>
+
+		// Decrease 5 for each 100
+<span class="fc" id="L112">		userBill.setFinalbillCost(billCost - (Math.floor(Math.floor(billCost) / 100) * 5));</span>
+<span class="fc" id="L113">		System.out.println(&quot;Bill Amount After Final Discount is : &quot; + userBill.getFinalbillCost());</span>
+
+<span class="fc" id="L115">		return userBill.getFinalbillCost();</span>
+
+	}
+
+	/*
+	 * This function used to return the total of grocieres items
+	 * 
+	 * @param shoopingItemList  list of item user buy
+	 * @return cost of groceries items
+	 */
+	public Double getGroceriedItemCost(List&lt;ShoppingItem&gt; shoopingItemList) {
+<span class="fc" id="L126">		Double cost = 0.0;</span>
+<span class="fc bfc" id="L127" title="All 2 branches covered.">		for (ShoppingItem shoppingItem : userBill.getShoopingItemList()) {</span>
+<span class="fc bfc" id="L128" title="All 2 branches covered.">			if (shoppingItem.getCategory().equals(ShoppingItemCategory.GROCERIES)) {</span>
+<span class="fc" id="L129">				cost += shoppingItem.getItemCost();</span>
+			}
+<span class="fc" id="L131">		}</span>
+
+<span class="fc" id="L133">		return cost;</span>
+	}
+
+	/*
+	 * This function used to print full trace of bill statment
+	 * @param Bill 
+	 * 
+	 */
+	public String printBillDetails(Bill bill) {
+<span class="fc" id="L142">		StringBuilder stringBuilder = new StringBuilder();</span>
+<span class="fc" id="L143">		stringBuilder.append(&quot;User Details:&quot;);</span>
+<span class="fc" id="L144">		stringBuilder.append(user.toString());</span>
+<span class="fc" id="L145">		stringBuilder.append(&quot;Shop the following:&quot;);</span>
+<span class="fc" id="L146">		stringBuilder.append(bill.getShoopingItemList().toString());</span>
+<span class="fc" id="L147">		stringBuilder.append(&quot; Total Bill Amount : &quot;);</span>
+<span class="fc" id="L148">		stringBuilder.append(bill.getTotalBill());</span>
+<span class="fc" id="L149">		stringBuilder.append(&quot; Bill Amount After User Discount:&quot;);</span>
+<span class="fc" id="L150">		stringBuilder.append(bill.getTotalBillAfterUserTypeDiscount());</span>
+<span class="fc" id="L151">		stringBuilder.append(&quot; Bill Amount After final Discount:&quot;);</span>
+<span class="fc" id="L152">		stringBuilder.append(bill.getFinalbillCost());</span>
+<span class="fc" id="L153">		return stringBuilder.toString();</span>
+
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
